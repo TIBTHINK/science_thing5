@@ -57,7 +57,7 @@ public class CLocation extends Location {
 
         if (!this.getUseMetricUnits()) {
             //covert them meters a secound to them nice miles per syrup
-            nSpeed = super.getSpeed() * 3.2808398501312f;
+            nSpeed = super.getSpeed() * 2.23693629f;
         }
 
         return nSpeed;

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">science_thing5</string>
+
+    <string name="lostpassword">source code <a href="https://github.com/TIBTHINK/science_thing5" target="_top">Github repo page</a></string>
+
+
 </resources>

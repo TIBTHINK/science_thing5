@@ -12,8 +12,6 @@ import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -49,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             DoShit();
         }
 
-
-
         this.updateSpeed(null);
 
         sw_metric.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -60,13 +56,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
             }
         });
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-
     }
 
 
@@ -86,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
     }
+
+
 
     @Override
     public void onLocationChanged(Location location){
@@ -152,6 +143,5 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         }
     }
-
 
 }

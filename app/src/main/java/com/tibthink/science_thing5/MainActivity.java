@@ -2,8 +2,6 @@ package com.tibthink.science_thing5;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,10 +9,15 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.format.Formatter;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +25,10 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
-    SwitchCompat sw_metric;
+    Switch sw_metric;
     TextView tv_speed;
+    Button button;
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         sw_metric = findViewById(R.id.sw_metric);
         tv_speed = findViewById(R.id.tv_speed);
+        button = findViewById(R.id.button);
+
 
         //check if the fuckers let me use the gps permissions
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -42,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             DoShit();
         }
 
+
+
         this.updateSpeed(null);
 
         sw_metric.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -49,6 +58,31 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 MainActivity.this.updateSpeed(null);
 
+            }
+        });
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+
+    }
+
+
+    public void playSound(View view) {
+        mp = MediaPlayer.create(this, R.raw.button);
+
+        mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mp.start();
+            }
+        });
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mp.release();
             }
         });
     }
@@ -118,4 +152,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         }
     }
+
+
 }
